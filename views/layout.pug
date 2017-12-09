@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://cdn.auth0.com/js/auth0/8.7/auth0.min.js")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(type='text/javascript', src='/javascript/nipplejs.min.js')
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript', src='/javascript/index.js') 
+  body
+    nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#') RobotCarControll
+        ul.nav.navbar-nav
+        ul.nav.navbar-nav.navbar-right(style='margin-right: 0px')
+          if loggedIn
+            a.btn.btn-danger.navbar-btn(href="/logout")
+              span.glyphicon.glyphicon-log-in
+              |  LogOut
+          else
+            a.btn.btn-danger.navbar-btn(href="/login")
+              span.glyphicon.glyphicon-user
+              |  LogIn
+    if loggedIn
+      block content
+    else
+      .alert.alert-danger
+        h4
+          | You are not logged in! Please 
+          a.alert-link(href='/login') Log In
+          |  to continue.
+
+
+

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+  #dynamic.container
+    #joystick.col-xs-6.col-sm-6.col-md-6.col-lg-6
+    #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
+      .container-fluid.c(style='width:350px; height:350px')
+        .row.f
+          .col-sm-4.r
+            img.btn.r(onmousedown='key({"key":"a"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-5.png')
+          .col-sm-4.r
+            img.btn.r(onmousedown='drive(0)' onmouseup='drive(-1)' src='/media/btns/up-arrow.png')
+          .col-sm-4.r
+            img.btn.r(onmousedown='key({"key":"d"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-7.png')
+        .row.f
+          .col-sm-4.r
+            //img.btn.r(onmousedown='drive(2)' onmouseup='drive(-1)' src='/media/btns/left-arrow.png')
+          .col-sm-4.r
+            //if lamp
+            //  img.btn.r(onclick='key({"key":"l"})' src='/media/btns/flashlight_on.png')
+            //else 
+            img#img_.btn.r(onclick='key({"key":"l"})' src='/media/btns/flashlight_off.png')
+          .col-sm-4.r
+            //img.btn.r(onmousedown='drive(3)' onmouseup='drive(-1)' src='/media/btns/right-arrow.png')
+        .row.f
+          .col-sm-4.r
+            img.btn.r(onmousedown='key({"key":"z"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-8.png')
+          .col-sm-4.r
+            img.btn.r(onmousedown='drive(1)' onmouseup='drive(-1)' src='/media/btns/down-arrow.png')
+          .col-sm-4.r
+            img.btn.r(onmousedown='key({"key":"c"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-6.png')
