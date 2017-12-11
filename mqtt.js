@@ -1,9 +1,10 @@
 const
-    topic_status = "carcontrol/status",
-    topic_drive = "carcontrol/drive",
-    topic_func = "carcontrol/func",
-    topic_data = "carcontrol/data",
-    topic_cb = "carcontrol/cb";
+    topic_status = "sgh/status",
+    topic_drive = "sgh/drive",
+    topic_func = "sgh/func",
+    topic_data = "sgh/data",
+    topic_ctrl = "sgh/ctrl",
+    topic_cb = "sgh/cb";
 
 var mosca = require('mosca'),
     mqtt = require('mqtt');
@@ -20,11 +21,13 @@ var set = {
 };
 
 var settings = {
-    port: 1883,
+    port: 1889,
     backend: set
 };
 
 var server = new mosca.Server(settings);
+
+var sockets = [];
 
 server.on('clientConnected', function(client) {
     console.log('new client', client.id);
@@ -33,44 +36,37 @@ server.on('ready', mqtt_started);
 
 function mqtt_started() {
     console.log('Mosca server is up and running');
-    client = mqtt.connect('mqtt://localhost');
+    client = mqtt.connect('mqtt://localhost:1889');
 
     client.on('connect', function() {
+        console.log("CONNECTED")
         client.subscribe(topic_status)
         client.subscribe(topic_data)
         client.subscribe(topic_cb)
         client.subscribe(topic_drive)
+            //client.subscribe(topic_ctrl)
         client.subscribe(topic_func)
         client.publish(topic_status, '@server/started');
     });
 
     client.on('message', function(topic, message) {
         message = message.toString();
-        if (message == "@ping") {
-            var n = Date.now();
-            console.log(n + "  " + lastPing);
-            df = n - lastPing - 3000;
-            lastPing = Date.now();
-            console.log("Ping time: " + df);
-        }
-        console.log(message);
+        console.log(message)
+        sockets.forEach(function(sock) {
+            sock.emit("mqtt", topic, message);
+        }, this);
     });
     //client.end();
 }
 
-
-function mqtt_get_ping() {
-    return df;
+function mqtt_seng_ctrl(a, b, c) {
+    var res = a + ";" + b + ";" + c + ";";
+    client.publish(topic_ctrl, res);
 }
 
-function mqtt_send_drive(a, b) {
-    var res = "@drive:" + a + "&" + b + ";";
-    client.publish(topic_drive, res);
+var addSock = function(sock) {
+    sockets.push(sock);
 }
 
-function mqtt_send_func(a) {
-    client.publish(topic_func, a);
-}
-
-module.exports.mqtt_send_drive = mqtt_send_drive;
-module.exports.mqtt_send_func = mqtt_send_func;
+module.exports.mqtt_seng_ctrl = mqtt_seng_ctrl;
+module.exports.addSock = addSock;

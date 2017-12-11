@@ -36,27 +36,56 @@ body,
 
 #btns {
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .r {
-    height: 110px
+    height: 110px;
+    display: block;
+    margin: auto;
+}
+
+.hcenter {
+    display: block;
+    margin: auto;
 }
 
 .f {
-    padding-top: 10px
+    padding: 0px
 }
 
 .c {
     position: absolute;
     top: 50%;
-    left: 30%;
+    left: 50%;
     transform: translateX(-30%) translateY(-50%);
     -moz-transform: translateX(-30%) translateY(-50%);
     -webkit-transform: translateX(-30%) translateY(-50%);
+}
+
+.cf {
+    position: absolute;
 }
 
 .container4 {
     display: block;
     margin-left: auto;
     margin-right: auto
+}
+
+.val_label {
+    color: limegreen;
+}
+
+.val_data {
+    color: blueviolet;
+    vertical-align: center;
+}
+
+.lname {
+    display: flex;
+    align-items: left;
+    justify-content: left;
 }

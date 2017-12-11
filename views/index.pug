@@ -1,32 +1,58 @@
 extends layout
 
 block content
-
   #dynamic.container
-    #joystick.col-xs-6.col-sm-6.col-md-6.col-lg-6
-    #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
-      .container-fluid.c(style='width:350px; height:350px')
-        .row.f
-          .col-sm-4.r
-            img.btn.r(onmousedown='key({"key":"a"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-5.png')
-          .col-sm-4.r
-            img.btn.r(onmousedown='drive(0)' onmouseup='drive(-1)' src='/media/btns/up-arrow.png')
-          .col-sm-4.r
-            img.btn.r(onmousedown='key({"key":"d"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-7.png')
-        .row.f
-          .col-sm-4.r
-            //img.btn.r(onmousedown='drive(2)' onmouseup='drive(-1)' src='/media/btns/left-arrow.png')
-          .col-sm-4.r
-            //if lamp
-            //  img.btn.r(onclick='key({"key":"l"})' src='/media/btns/flashlight_on.png')
-            //else 
-            img#img_.btn.r(onclick='key({"key":"l"})' src='/media/btns/flashlight_off.png')
-          .col-sm-4.r
-            //img.btn.r(onmousedown='drive(3)' onmouseup='drive(-1)' src='/media/btns/right-arrow.png')
-        .row.f
-          .col-sm-4.r
-            img.btn.r(onmousedown='key({"key":"z"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-8.png')
-          .col-sm-4.r
-            img.btn.r(onmousedown='drive(1)' onmouseup='drive(-1)' src='/media/btns/down-arrow.png')
-          .col-sm-4.r
-            img.btn.r(onmousedown='key({"key":"c"})' onmouseup='drive(-1)' src='/media/btns/diagonal-arrow-6.png')
+    .row(style='height:5%;')
+      .col-xs-5.col-sm-5.col-md-5.col-lg-5
+        h2.val_label(align="center")= "Показания"
+      .col-xs-6.col-sm-6.col-md-6.col-lg-6
+        h2.val_label(align="center")= "Управление"
+      .col-xs-1.col-sm-1.col-md-1.col-lg-1
+    .row(style='height:95%;')    
+      #btns.col-xs-5.col-sm-5.col-md-5.col-lg-5
+        .container-fluid.cf(style='width:100%;')
+          each id, val in {"Влажность почвы": "v_sh", "Температура": "v_at", "Влажность": "v_ah", "Освещенность": "v_lig", "Давление": "v_pres"}
+            .row(style='padding:10px')
+              .col-sm-8.lname
+                h2.val_label= val
+              .col-sm-4.lname
+                h2.val_data(id=id)
+      #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
+        .container-fluid(style='width:100%; height:100%')
+          .row(style='height:33%;')  
+            .col-sm-6
+              img.btn.r#btn0(onclick='toggleState(0)' src='/media/btns/water_0.png')
+            .col-sm-6
+              img.btn.r#btn1(onclick='toggleState(1)' src='/media/btns/bulb_0.png')
+          .row(style='height:33%;')  
+            .col-sm-6
+              img.btn.r#btn2(onclick='toggleState(2)' src='/media/btns/fan_0.png')
+            .col-sm-6
+              img.btn.r#btn3(onclick='toggleState(3)' src='/media/btns/heat_0.png')
+          .row(style='height:33%;')  
+            .col-sm-4
+              .radio
+                label(style='color:greenyellow')
+                  input(type='radio', name='radio0', onclick="setData(2, 0, 0)")
+                  | Молодые растения
+              .radio
+                label(style='color:greenyellow')
+                  input(type='radio', name='radio0', onclick="setData(2, 0, 1)")
+                  | Взрослые растения
+            .col-sm-4
+              .radio
+                label(style='color:orange')
+                  input(type='radio', name='radio1', onclick="setData(2, 1, 0)")
+                  | Помидоры
+              .radio
+                label(style='color:orange')
+                  input(type='radio', name='radio1', onclick="setData(2, 1, 1)")
+                  | Орурцы
+              .radio
+                label(style='color:orange')
+                  input(type='radio', name='radio1', onclick="setData(2, 1, 2)")
+                  | Домашние цветы
+            .col-sm-4
+              img.btn.r#btn5(onclick='toggleCtrl(3)' src='/media/btns/auto_1.png')
+      #btns.col-xs-1.col-sm-1.col-md-1.col-lg-1
+          .container-fluid(style='width:100%; height:100%')

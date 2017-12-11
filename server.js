@@ -74,10 +74,8 @@ var initSocket = function(socket) {
     socket.on("disconnect", () => {
         sockets.splice(sockets.indexOf(socket), 1);
     });
-    socket.on("drive", (a, b) => {
-        mqtt.mqtt_send_drive(a, b);
+    socket.on("ctrl", (a, b, c) => {
+        mqtt.mqtt_seng_ctrl(a, b, c);
     });
-    socket.on("light", (a) => {
-        mqtt.mqtt_send_func("l" + a);
-    });
+    mqtt.addSock(socket);
 }
