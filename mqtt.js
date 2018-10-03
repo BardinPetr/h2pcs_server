@@ -15,7 +15,7 @@ var df = 0;
 
 var set = {
     type: 'mongo',
-    url: 'mongodb://a:123456@ds119993.mlab.com:19993/h2pcs',
+    url: 'mongodb://a:a123456@ds119993.mlab.com:19993/h2pcs',
     pubsubCollection: 'ascoltatori',
     mongo: {}
 };
