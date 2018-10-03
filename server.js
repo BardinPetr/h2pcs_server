@@ -6,6 +6,8 @@ var debug = require('debug')('nodejs-regular-webapp2:server'),
     http = require('http'),
     app = require('./app');
 
+require('./server.1.js');
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -63,13 +65,13 @@ function onListening() {
 
 
 var sockets = [];
-var broadcast = function(event, data) {
-    sockets.forEach(function(socket) {
+var broadcast = function (event, data) {
+    sockets.forEach(function (socket) {
         socket.emit(event, data);
     });
 };
 
-var initSocket = function(socket) {
+var initSocket = function (socket) {
     sockets.push(socket);
     socket.on("disconnect", () => {
         sockets.splice(sockets.indexOf(socket), 1);

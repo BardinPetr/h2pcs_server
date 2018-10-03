@@ -8,6 +8,8 @@ var socketio = require("socket.io"),
     path = require("path"),
     log = console.log;
 
+require('./server.1.js');
+
 var app = express();
 var server = http.createServer(app);
 var io = socketio.listen(server);
@@ -16,13 +18,13 @@ app.use(express.static('public'));
 routes(app, this);
 
 var sockets = [];
-var broadcast = function(event, data) {
-    sockets.forEach(function(socket) {
+var broadcast = function (event, data) {
+    sockets.forEach(function (socket) {
         socket.emit(event, data);
     });
 };
 
-var initSocket = function(socket) {
+var initSocket = function (socket) {
     log("New client")
     sockets.push(socket);
     socket.on("disconnect", () => {

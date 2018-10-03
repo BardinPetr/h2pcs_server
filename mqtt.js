@@ -21,7 +21,7 @@ var set = {
 };
 
 var settings = {
-    port: 1889,
+    port: 1883,
     backend: set
 };
 
@@ -29,30 +29,30 @@ var server = new mosca.Server(settings);
 
 var sockets = [];
 
-server.on('clientConnected', function(client) {
+server.on('clientConnected', function (client) {
     console.log('new client', client.id);
 });
 server.on('ready', mqtt_started);
 
 function mqtt_started() {
     console.log('Mosca server is up and running');
-    client = mqtt.connect('mqtt://localhost:1889');
+    client = mqtt.connect('mqtt://localhost:1883');
 
-    client.on('connect', function() {
+    client.on('connect', function () {
         console.log("CONNECTED")
         client.subscribe(topic_status)
         client.subscribe(topic_data)
         client.subscribe(topic_cb)
         client.subscribe(topic_drive)
-            //client.subscribe(topic_ctrl)
+        //client.subscribe(topic_ctrl)
         client.subscribe(topic_func)
         client.publish(topic_status, '@server/started');
     });
 
-    client.on('message', function(topic, message) {
+    client.on('message', function (topic, message) {
         message = message.toString();
         console.log(message)
-        sockets.forEach(function(sock) {
+        sockets.forEach(function (sock) {
             sock.emit("mqtt", topic, message);
         }, this);
     });
@@ -64,7 +64,7 @@ function mqtt_seng_ctrl(a, b, c) {
     client.publish(topic_ctrl, res);
 }
 
-var addSock = function(sock) {
+var addSock = function (sock) {
     sockets.push(sock);
 }
 
