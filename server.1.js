@@ -3,7 +3,7 @@ var mosca = require('mosca'),
 
 var PlantModel = require('./Plant_schema');
 
-mongoose.connect('mongodb://localhost/h2pcs');
+mongoose.connect('mongodb://a:123456@ds119993.mlab.com:19993/h2pcs');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {});
