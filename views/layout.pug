@@ -8,13 +8,16 @@ html
     script(src="https://cdn.auth0.com/js/auth0/8.7/auth0.min.js")
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='/javascript/browserMqtt.js')
+    script(src='/javascript/protocol.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript', src='/javascript/index.js') 
   body
     nav.navbar.navbar-inverse
       .container-fluid
         .navbar-header
-          a.navbar-brand(href='#') Управление Умной Теплицей - ©BardinPetr
+          a.navbar-brand(href='#') Веб-страница H2Pcs - &copy;BardinPetr
         ul.nav.navbar-nav
         ul.nav.navbar-nav.navbar-right(style='margin-right: 0px')
           if loggedIn
@@ -33,6 +36,3 @@ html
           | You are not logged in! Please 
           a.alert-link(href='/login') Log In
           |  to continue.
-
-
-

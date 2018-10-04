@@ -1,51 +1,55 @@
-var socket = io.connect(),
-    f = true;
-
 const dev = false;
 window.pinState = [];
 window.fstate = false;
 
-socket.on("connect", () => {
-    if (f) {
-        f = false;
-    }
-});
+var client = mqtt.connect('mqtt://bardin.petr.fvds.ru')
 
-socket.on("mqtt", (topic, msg) => {
-    if (topic == "sgh/data") {
-        var a = msg.split(";");
+client.on('connect', function () {
+    client.subscribe('/sgh/', function (err) {
+        if (!err) {
+            client.publish('presence', 'Hello mqtt')
+        }
+    })
+})
+
+client.on('message', function (topic, message) {
+    var p = parse(message.toString())
+    var a = p[1];
+    if (p[0] == 'SENS') {
         $("#v_sh").html(a[0] + "%");
         $("#v_at").html(a[1] + "°C");
         $("#v_ah").html(a[2] + "%");
         $("#v_lig").html(a[3] + " лк");
         $("#v_pres").html(a[4] + " мм");
-    } else if (topic == "sgh/status") {
-        var a = msg.split(";");
+    } else if (p[0] == 'STAT') {
         if (a[5] == "0" || !window.fstate) {
             window.fstate = true;
             for (var i = 0; i < 6; i++)
                 window.pinState[i] = parseInt(a[i]);
         }
         updateBtns();
+    } else {
+
     }
-});
+    client.end()
+})
 
-var setState = function(id, state) {
-    socket.emit("ctrl", 0, id, state);
+var send = function () {
+    client.publish("/sgh/111/ctrl", create(...Array.prototype.slice.call(arguments, 0)))
 }
 
-var setData = function(f, id, state) {
-    socket.emit("ctrl", f, id, state);
+var setState = function (id, state) {
+    send("SETSTATE", id, state)
 }
 
-var toggleState = function(id) {
+var toggleState = function (id) {
     window.pinState[id] = (window.pinState[id] == 1 ? 0 : 1);
     window.pinState[5] = 1;
     setState(id, window.pinState[id]);
     updateBtns();
 }
 
-var updateBtns = function() {
+var updateBtns = function () {
     var arr = ["water", "bulb", "fan", "heat", "", "auto"];
     for (var index = 0; index < 5; index++) {
         if (index == 4) index = 5;
@@ -55,12 +59,12 @@ var updateBtns = function() {
     }
 }
 
-var toggleCtrl = function() {
+var toggleCtrl = function () {
     window.pinState[5] = (window.pinState[5] == 1 ? 0 : 1);
-    socket.emit("ctrl", 1, window.pinState[5], 0);
+    send("SETCTRL", window.pinState[5])
     updateBtns();
 }
 
-Number.prototype.map = function(in_min, in_max, out_min, out_max) {
+Number.prototype.map = function (in_min, in_max, out_min, out_max) {
     return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

@@ -16,7 +16,7 @@ block content
               .col-sm-8.lname
                 h2.val_label= val
               .col-sm-4.lname
-                h2.val_data(id=id)
+                h2.val_data(id=id) N/A
       #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
         .container-fluid(style='width:100%; height:100%')
           .row(style='height:33%;')  
@@ -33,25 +33,25 @@ block content
             .col-sm-4
               .radio
                 label(style='color:greenyellow')
-                  input(type='radio', name='radio0', onclick="setData(2, 0, 0)")
+                  input(type='radio', name='radio0', onclick="send('SETLID', 1)")
                   | Молодые растения
               .radio
                 label(style='color:greenyellow')
-                  input(type='radio', name='radio0', onclick="setData(2, 0, 1)")
+                  input(type='radio', name='radio0', onclick="send('SETLID', 2)")
                   | Взрослые растения
             .col-sm-4
               .radio
                 label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="setData(2, 1, 0)")
-                  | Помидоры
+                  input(type='radio', name='radio1', onclick="send('SETTARGT', 24)")
+                  | Розы
               .radio
                 label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="setData(2, 1, 1)")
-                  | Орурцы
+                  input(type='radio', name='radio1', onclick="send('SETTARGT', 22)")
+                  | Орхидея
               .radio
                 label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="setData(2, 1, 2)")
-                  | Домашние цветы
+                  input(type='radio', name='radio1', onclick="send('SETTARGT', 23)")
+                  | Среднее для домашних цветов
             .col-sm-4
               img.btn.r#btn5(onclick='toggleCtrl(3)' src='/media/btns/auto_1.png')
       #btns.col-xs-1.col-sm-1.col-md-1.col-lg-1
