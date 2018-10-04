@@ -20,7 +20,6 @@ client.on('message', function (topic, message) {
         $("#v_at").html(a[1] + "°C");
         $("#v_ah").html(a[2] + "%");
         $("#v_lig").html(a[3] + " лк");
-        $("#v_pres").html(a[4] + " мм");
     } else if (p[0] == 'STAT') {
         if (a[5] == "0" || !window.fstate) {
             window.fstate = true;

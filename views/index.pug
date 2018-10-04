@@ -11,7 +11,7 @@ block content
     .row(style='height:95%;')    
       #btns.col-xs-5.col-sm-5.col-md-5.col-lg-5
         .container-fluid.cf(style='width:100%;')
-          each id, val in {"Влажность почвы": "v_sh", "Температура": "v_at", "Влажность": "v_ah", "Освещенность": "v_lig", "Давление": "v_pres"}
+          each id, val in {"Влажность почвы": ["v_sh", "73%"], "Температура": ["v_at", "23C"], "Влажность": ["v_ah", "37%"], "Освещенность": ["v_lig", "2518lux"]}
             .row(style='padding:10px')
               .col-sm-8.lname
                 h2.val_label= val
