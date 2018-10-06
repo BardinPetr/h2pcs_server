@@ -2,7 +2,7 @@ const dev = false;
 window.pinState = [];
 window.fstate = false;
 
-var client = mqtt.connect('mqtt://bardin.petr.fvds.ru')
+var client = mqtt.connect('mqtt://bardin.petr.fvds.ru:1883')
 
 client.on('connect', function () {
     client.subscribe('/sgh/', function (err) {
