@@ -21,7 +21,7 @@ var set = {
 };
 
 var settings = {
-    port: 1883,
+    port: 1863,
     backend: set
 };
 
@@ -36,7 +36,7 @@ server.on('ready', mqtt_started);
 
 function mqtt_started() {
     console.log('Mosca server is up and running');
-    client = mqtt.connect('mqtt://localhost:1883');
+    client = mqtt.connect('mqtt://localhost:1863');
 
     client.on('connect', function () {
         console.log("CONNECTED")

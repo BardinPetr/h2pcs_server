@@ -3,34 +3,12 @@ var mosca = require('mosca'),
 
 var PlantModel = require('./Plant_schema');
 
-mongoose.connect('mongodb://a:a123456@ds119993.mlab.com:19993/h2pcs');
+mongoose.connect('mongodb://a:a123456@ds119993.mlab.com:19993/h2pcs', {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {});
 
-var settings = {
-  port: 1883,
-  backend: {
-    type: 'mongo',
-    url: 'mongodb://127.0.0.1:27017/mqtt',
-    pubsubCollection: 'h2pcs-mqtt',
-    mongo: {}
-  }
-};
-
 module.exports = () => {
-  /*
-  var server = new mosca.Server(settings);
-
-  server.on('clientConnected', function (client) {
-    console.log('client connected', client.id);
-  });
-
-  server.on('ready', () => {
-    console.log('Mosca server is up and running');
-  });
-  */
-
   var express = require('express');
   var app = express();
   app.get('/get_guid', (req, res) => {
@@ -82,4 +60,3 @@ module.exports = () => {
     console.log('Base SGH API is running on 3971');
   });
 }
-module.exports()

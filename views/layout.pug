@@ -2,37 +2,43 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="https://cdn.auth0.com/js/auth0/8.7/auth0.min.js")
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    script(src='/javascript/browserMqtt.js')
-    script(src='/javascript/protocol.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    script(type='text/javascript', src='/socket.io/socket.io.js')
-    script(type='text/javascript', src='/javascript/index.js') 
+    meta(charset='utf-8')
+    meta(content='initial-scale=1, shrink-to-fit=no, width=device-width', name='viewport')
+
+    link(href='https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    link(href='lib/material.min.css', rel='stylesheet')
+    link(href='stylesheets/style.css', rel='stylesheet')
+    link(href='stylesheets/switch.css', rel='stylesheet')
   body
-    nav.navbar.navbar-inverse
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href='#') Веб-страница H2Pcs - &copy;BardinPetr
-        ul.nav.navbar-nav
-        ul.nav.navbar-nav.navbar-right(style='margin-right: 0px')
-          if loggedIn
-            a.btn.btn-danger.navbar-btn(href="/logout")
-              span.glyphicon.glyphicon-log-in
-              |  LogOut
+    nav.navbar.navbar-dark.bg-primary
+      a.navbar-brand(href='#') Панель управления H2Pcs
+      if !loggedIn
+        .btn-group-toggle(data-toggle='buttons')
+          label.btn.btn-secondary.active
+            input#automode(type='checkbox', checked='', autocomplete='off')
+            |  АВТОМАТИЧЕСКИЙ РЕЖИМ
+      my-2.my-lg-0.ul
+          if !loggedIn
+              a.btn.btn-warning.my-1.navbar-btn(href="/logout")
+                span.glyphicon.glyphicon-log-in
+                |  ВЫХОД 
           else
-            a.btn.btn-danger.navbar-btn(href="/login")
-              span.glyphicon.glyphicon-user
-              |  LogIn
-    if loggedIn
-      block content
-    else
-      .alert.alert-danger
-        h4
-          | You are not logged in! Please 
-          a.alert-link(href='/login') Log In
-          |  to continue.
+              a.btn.btn-danger.navbar-btn(href="/login")
+                span.glyphicon.glyphicon-user
+                |  ВХОД
+    .container.body_container.bg-dark(style="padding-top: 15px")
+      if !loggedIn
+        block content
+
+  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+  script(src='lib/material.min.js')
+  script(type='text/javascript', src="https://cdn.auth0.com/js/auth0/8.7/auth0.min.js")
+  script(src='https://cdn.auth0.com/js/lock/11.3/lock.min.js')
+  script(type='text/javascript', src='/javascript/browserMqtt.js')
+  script(type='text/javascript', src='/socket.io/socket.io.js')
+  script(type='text/javascript', src='/javascript/protocol.js')
+  script(type='text/javascript', src='/javascript/index.js') 
+

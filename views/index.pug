@@ -1,58 +1,113 @@
 extends layout
 
+mixin switch(id)
+  - uid = 'colorful-switch-cb' + id
+  .card_sw
+    .colorful-switch
+      input.colorful-switch__checkbox(type='checkbox' id=uid)
+      label.colorful-switch__label(for=uid)
+        span.colorful-switch__bg
+        span.colorful-switch__dot
+        span.colorful-switch__on
+          span.colorful-switch__on__inner
+        span.colorful-switch__off
+
 block content
-  #dynamic.container
-    .row(style='height:5%;')
-      .col-xs-5.col-sm-5.col-md-5.col-lg-5
-        h2.val_label(align="center")= "Показания"
-      .col-xs-6.col-sm-6.col-md-6.col-lg-6
-        h2.val_label(align="center")= "Управление"
-      .col-xs-1.col-sm-1.col-md-1.col-lg-1
-    .row(style='height:95%;')    
-      #btns.col-xs-5.col-sm-5.col-md-5.col-lg-5
-        .container-fluid.cf(style='width:100%;')
-          each id, val in {"Влажность почвы": ["v_sh", "73%"], "Температура": ["v_at", "23C"], "Влажность": ["v_ah", "37%"], "Освещенность": ["v_lig", "2518lux"]}
-            .row(style='padding:10px')
-              .col-sm-8.lname
-                h2.val_label= val
-              .col-sm-4.lname
-                h2.val_data(id=id[0])= id[1]
-      #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
-        .container-fluid(style='width:100%; height:100%')
-          .row(style='height:33%;')  
-            .col-sm-6
-              img.btn.r#btn0(onclick='toggleState(0)' src='/media/btns/water_0.png')
-            .col-sm-6
-              img.btn.r#btn1(onclick='toggleState(1)' src='/media/btns/bulb_0.png')
-          .row(style='height:33%;')  
-            .col-sm-6
-              img.btn.r#btn2(onclick='toggleState(2)' src='/media/btns/fan_0.png')
-            .col-sm-6
-              img.btn.r#btn3(onclick='toggleState(3)' src='/media/btns/heat_0.png')
-          .row(style='height:33%;')  
-            .col-sm-4
-              .radio
-                label(style='color:greenyellow')
-                  input(type='radio', name='radio0', onclick="send('SETLID', 1)")
-                  | Молодые растения
-              .radio
-                label(style='color:greenyellow')
-                  input(type='radio', name='radio0', onclick="send('SETLID', 2)")
-                  | Взрослые растения
-            .col-sm-4
-              .radio
-                label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="send('SETTARGT', 24)")
-                  | Розы
-              .radio
-                label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="send('SETTARGT', 22)")
-                  | Орхидея
-              .radio
-                label(style='color:orange')
-                  input(type='radio', name='radio1', onclick="send('SETTARGT', 23)")
-                  | Среднее для домашних цветов
-            .col-sm-4
-              img.btn.r#btn5(onclick='toggleCtrl(3)' src='/media/btns/auto_1.png')
-      #btns.col-xs-1.col-sm-1.col-md-1.col-lg-1
-          .container-fluid(style='width:100%; height:100%')
+  .row
+    each id, val in {"Влажность почвы": ["v_sh", "73%"], "Температура": ["v_at", "23°C"], "Влажность": ["v_ah", "37%"], "Освещенность": ["v_lig", "2518 лк"]}
+      .col-lg-3.col-md-3.col-sm-6
+        .card.bg-primary.text-white.text-center.p-1
+          blockquote.blockquote.mb-0.val_all
+            p.val_field(id=id[0])= id[1]
+            h5= val
+  hr
+  .row
+    each id, val in {"Полив": "b_sh", "Нагреватель": "b_at", "Охлаждение": "b_ah", "Освещение": "b_lig"}
+      .col-lg-3.col-md-3.col-sm-6(style='text-align: center;')
+        .card.bg-primary.text-white.text-center
+          blockquote.blockquote.mb-0.val_all
+            h5.val_field(id=id)= val
+          +switch(val)
+
+
+
+    //- each id, val in {"Полив": "b_sh", "Нагреватель": "b_at", "Охлаждение": "b_ah", "Освещение": "b_lig"}
+    //-   .col-lg-3.col-md-3.col-sm-6(style='text-align: center;')
+    //-     .card.bg-primary.text-white.text-center.row(style="")
+    //-       table.table(style="background: transparent")
+    //-         tbody
+    //-           tr
+    //-             td(style="padding: 0;")
+    //-               blockquote.blockquote.mb-0.val_all
+    //-                 h5.val_field(id=id)= val
+    //-               +switch(val)
+    //-             td(style="padding: 0;")
+    //-               blockquote.blockquote.mb-0.val_all
+    //-                   h5.val_field(id=id)= val
+
+
+
+  //- hr
+  //- .row
+  //-   .col-lg-3.col-md-3.col-sm-3
+  //-     .card(style='width: 18rem;')
+  //-       img.card-img-top(src="media/btns/auto_0.png", alt='Card image cap')
+  //-       .card-body
+  //-         p.card-text
+  //-           | Some quick example text to build on the card title and make up the bulk of the card's content.
+
+
+    //- .row(style='height:5%;')
+    //-   .col-xs-5.col-sm-5.col-md-5.col-lg-5
+    //-     h2.val_label(align="center")= "Показания"
+    //-   .col-xs-6.col-sm-6.col-md-6.col-lg-6
+    //-     h2.val_label(align="center")= "Управление"
+    //-   .col-xs-1.col-sm-1.col-md-1.col-lg-1
+    //- .row(style='height:95%;')    
+    //-   #btns.col-xs-5.col-sm-5.col-md-5.col-lg-5
+    //-     .container-fluid.cf(style='width:100%;')
+    //-       each id, val in {"Влажность почвы": ["v_sh", "73%"], "Температура": ["v_at", "23C"], "Влажность": ["v_ah", "37%"], "Освещенность": ["v_lig", "2518lux"]}
+    //-         .row(style='padding:10px')
+    //-           .col-sm-8.lname
+    //-             h2.val_label= val
+    //-           .col-sm-4.lname
+    //-             h2.val_data(id=id[0])= id[1]
+    //-   #btns.col-xs-6.col-sm-6.col-md-6.col-lg-6
+    //-     .container-fluid(style='width:100%; height:100%')
+    //-       .row(style='height:33%;')  
+    //-         .col-sm-6
+    //-           img.btn.r#btn0(onclick='toggleState(0)' src='/media/btns/water_0.png')
+    //-         .col-sm-6
+    //-           img.btn.r#btn1(onclick='toggleState(1)' src='/media/btns/bulb_0.png')
+    //-       .row(style='height:33%;')  
+    //-         .col-sm-6
+    //-           img.btn.r#btn2(onclick='toggleState(2)' src='/media/btns/fan_0.png')
+    //-         .col-sm-6
+    //-           img.btn.r#btn3(onclick='toggleState(3)' src='/media/btns/heat_0.png')
+    //-       .row(style='height:33%;')  
+    //-         .col-sm-4
+    //-           .radio
+    //-             label(style='color:greenyellow')
+    //-               input(type='radio', name='radio0', onclick="send('SETLID', 1)")
+    //-               | Молодые растения
+    //-           .radio
+    //-             label(style='color:greenyellow')
+    //-               input(type='radio', name='radio0', onclick="send('SETLID', 2)")
+    //-               | Взрослые растения
+    //-         .col-sm-4
+    //-           .radio
+    //-             label(style='color:orange')
+    //-               input(type='radio', name='radio1', onclick="send('SETTARGT', 24)")
+    //-               | Розы
+    //-           .radio
+    //-             label(style='color:orange')
+    //-               input(type='radio', name='radio1', onclick="send('SETTARGT', 22)")
+    //-               | Орхидея
+    //-           .radio
+    //-             label(style='color:orange')
+    //-               input(type='radio', name='radio1', onclick="send('SETTARGT', 23)")
+    //-               | Среднее для домашних цветов
+    //-         .col-sm-4
+    //-           img.btn.r#btn5(onclick='toggleCtrl(3)' src='/media/btns/auto_1.png')
+    //-   #btns.col-xs-1.col-sm-1.col-md-1.col-lg-1
+    //-       .container-fluid(style='width:100%; height:100%')

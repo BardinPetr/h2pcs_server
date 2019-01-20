@@ -6,7 +6,7 @@ var debug = require('debug')('nodejs-regular-webapp2:server'),
     http = require('http'),
     app = require('./app');
 
-require('./server.1.js');
+require('./server.api.js');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
