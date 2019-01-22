@@ -7,7 +7,7 @@ var client = mqtt.connect(!dev ? "mqtt://:1863" : "mqtt://127.0.0.1:1863");
 client.on("connect", function() {
   client.subscribe("/sgh/", function(err) {
     if (!err) {
-      client.publish("presence", "Hello mqtt");
+      client.publish("stat", "New conn");
     }
   });
 });
