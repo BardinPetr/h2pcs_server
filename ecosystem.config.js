@@ -21,7 +21,7 @@ module.exports = {
       host: ["212.109.194.80"],
       ssh_options: "StrictHostKeyChecking=no",
       ref: "origin/master",
-      repo: "git@bitbucket.org:BardinPetr/sgh_server.git",
+      repo: "git@github.com:BardinPetr/h2pcs_server.git",
       path: "/home/root/h2pcs",
       "pre-setup": "",
       "post-setup": "",
