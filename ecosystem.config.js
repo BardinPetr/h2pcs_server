@@ -8,7 +8,7 @@ module.exports = {
         AUTH0_DOMAIN: "deep-null.auth0.com",
         AUTH0_CLIENT_SECRET:
           "ZHlC1kQntwct-zMxFaieOsS1ONgY0dPIhX-ibplg_YwJnXFfmJcSoxIY27Cejyq7",
-        AUTH0_CALLBACK_URL: "http://localhost:3777/callback",
+        AUTH0_CALLBACK_URL: "http://h2pcs.onthewifi.com/callback",
         IS_RELEASE: "true",
         PORT: 3777
       }
