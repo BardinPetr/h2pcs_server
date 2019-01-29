@@ -17,8 +17,8 @@ function setConnected(a) {
     setTimeout(() => {
       $('#loadingmodal').modal("hide");
       clearTimeout(window.autodisable);
-      window.autodisable = setTimeout(() => setConnected(false), 5000);
-    }, 3000);
+      window.autodisable = setTimeout(() => setConnected(false), 15000);
+    }, 1500);
   } else {
     $('#loadingmodal').modal({
       backdrop: "static",
@@ -40,7 +40,7 @@ $(document).ready(function () {
   });
   setTimeout(() => {
     socket.emit("guid", 111);
-  }, 1000);
+  }, 300);
   initCharts();
 });
 
