@@ -10,16 +10,16 @@ html
     link(href='lib/material.min.css', rel='stylesheet')
     link(href='stylesheets/style.css', rel='stylesheet')
     link(href='stylesheets/switch.css', rel='stylesheet')
-  body
+  body.bg-dark
     nav.navbar.navbar-dark.bg-primary
       a.navbar-brand(href='#') Панель управления H2Pcs
-      if !loggedIn
+      if loggedIn
         .btn-group-toggle(data-toggle='buttons')
           label.btn.btn-secondary.active
             input#automode(type='checkbox', checked='', autocomplete='off')
             |  АВТОМАТИЧЕСКИЙ РЕЖИМ
       my-2.my-lg-0.ul
-          if !loggedIn
+          if loggedIn
               a.btn.btn-warning.my-1.navbar-btn(href="/logout")
                 span.glyphicon.glyphicon-log-in
                 |  ВЫХОД 
@@ -27,11 +27,24 @@ html
               a.btn.btn-danger.navbar-btn(href="/login")
                 span.glyphicon.glyphicon-user
                 |  ВХОД
-    .container.body_container.bg-dark(style="padding-top: 15px")
-      if !loggedIn
+    .container.body_container(style="padding-top: 15px")
+      if loggedIn
         block content
+        #loadingmodal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loadingmodalTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+              .modal-header
+                h5#loadingmodalTitle.modal-title Подключение к сиcтеме
+                .lds-facebook
+                  div
+                  div
+                  div
 
-  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+
+
+
+
+  script(src='https://code.jquery.com/jquery-3.3.1.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
   script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
   script(src='lib/material.min.js')
@@ -41,4 +54,5 @@ html
   script(type='text/javascript', src='/socket.io/socket.io.js')
   script(type='text/javascript', src='/javascript/protocol.js')
   script(type='text/javascript', src='/javascript/index.js') 
+  script(type='text/javascript', src='/javascript/smoothie.js')
 
