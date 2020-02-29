@@ -10,6 +10,7 @@ module.exports = {
           "ZHlC1kQntwct-zMxFaieOsS1ONgY0dPIhX-ibplg_YwJnXFfmJcSoxIY27Cejyq7",
         AUTH0_CALLBACK_URL: "https://h2pcs.xyz/callback",
         IS_RELEASE: "true",
+	MDB_CONN: "mongodb://server:6TcqPmZr7KGTR34x@ds263848.mlab.com:63848/h2pcs",
         PORT: 3777
       }
     }

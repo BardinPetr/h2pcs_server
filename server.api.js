@@ -5,7 +5,7 @@ var mosca = require("mosca"),
 var PlantModel = require("./Plant_schema");
 
 mongoose.connect(
-  "mongodb://a:a123456@ds119993.mlab.com:19993/h2pcs",
+  process.env.MDB_CONN,
   {
     useNewUrlParser: true
   }
