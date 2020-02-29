@@ -13,7 +13,7 @@ var server = new mosca.Server({
   port: 1883,
   backend: {
     type: "mongo",
-    url: "mongodb://a:a123456@ds119993.mlab.com:19993/h2pcs",
+    url: process.env.MDB_CONN,
     pubsubCollection: "ascoltatori",
     mongo: {}
   }
